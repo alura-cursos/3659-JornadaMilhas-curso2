@@ -31,19 +31,14 @@ public class ContextoFixture: IAsyncLifetime
 
     public void CriaDadosFake()
     {
-        var fakerPeriodo = new Faker<Periodo>()
-            .CustomInstantiator(f =>
-            {
-                DateTime dataInicio = f.Date.Soon();
-                return new Periodo(dataInicio, dataInicio.AddDays(30));
-            });
+        Periodo periodo = new PeriodoDataBuilder().Build();
 
         var rota = new Rota("Curitiba", "São Paulo");
 
         var fakerOferta = new Faker<OfertaViagem>()
             .CustomInstantiator(f => new OfertaViagem(
                 rota,
-                fakerPeriodo.Generate(),
+                new PeriodoDataBuilder().Build(),
                 100 * f.Random.Int(1, 100))
             )
             .RuleFor(o => o.Desconto, f => 40)

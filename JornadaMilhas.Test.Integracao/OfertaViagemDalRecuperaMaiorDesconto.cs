@@ -29,7 +29,7 @@ public class OfertaViagemDalRecuperaMaiorDesconto
     {
         //arrange
         var rota = new Rota("Curitiba", "São Paulo");
-        Periodo periodo = new Periodo(new DateTime(2024, 8, 20), new DateTime(2024, 8, 30));
+        Periodo periodo = new PeriodoDataBuilder() { DataInicial = new DateTime(2024, 5,20)}.Build();
         fixture.CriaDadosFake();
 
         var ofertaEscolhida = new OfertaViagem(rota, periodo, 80)
