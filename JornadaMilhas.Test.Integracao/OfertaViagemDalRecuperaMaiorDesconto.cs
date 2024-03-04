@@ -12,7 +12,7 @@ using Xunit.Abstractions;
 
 namespace JornadaMilhas.Test.Integracao;
 [Collection(nameof(ContextoCollection))]
-public class OfertaViagemDalRecuperaMaiorDesconto
+public class OfertaViagemDalRecuperaMaiorDesconto: IDisposable
 {
     private readonly JornadaMilhasContext context;
     private readonly ContextoFixture fixture;
@@ -21,6 +21,11 @@ public class OfertaViagemDalRecuperaMaiorDesconto
     {
         context = fixture.Context;
         this.fixture = fixture;
+    }
+
+    public void Dispose()
+    {
+        fixture.LimpaDadosDoBanco();
     }
 
     [Fact]
@@ -52,6 +57,7 @@ public class OfertaViagemDalRecuperaMaiorDesconto
         //assert
         Assert.NotNull(oferta);
         Assert.Equal(precoEsperado, oferta.Preco, 0.0001);
+
     }
 
     [Fact]
