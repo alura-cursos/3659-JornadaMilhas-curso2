@@ -17,15 +17,20 @@ public class OfertaViagemDalAdicionar
         context = new JornadaMilhasContext(options);
     }
 
+    private OfertaViagem CriaOfertaViagem()
+    {
+        Rota rota = new Rota("São Paulo", "Fortaleza");
+        Periodo periodo = new Periodo(new DateTime(2024, 8, 20), new DateTime(2024, 8, 30));
+        double preco = 350;
+        return new OfertaViagem(rota, periodo, preco);
+    }
+
     [Fact]
     public void RegistraOfertaNoBanco()
     {
         //arrange
-        Rota rota = new Rota("São Paulo", "Fortaleza");
-        Periodo periodo = new Periodo(new DateTime(2024, 8, 20), new DateTime(2024, 8, 30));
-        double preco = 350;
 
-        var oferta = new OfertaViagem(rota, periodo, preco);
+        var oferta = CriaOfertaViagem();
         var dal = new OfertaViagemDAL(context);
 
         //act
@@ -41,11 +46,7 @@ public class OfertaViagemDalAdicionar
     public void RegistraOfertaNoBancoComInformacoesCorretas()
     {
         //arrange
-        Rota rota = new Rota("São Paulo", "Fortaleza");
-        Periodo periodo = new Periodo(new DateTime(2024, 8, 20), new DateTime(2024, 8, 30));
-        double preco = 350;
-
-        var oferta = new OfertaViagem(rota, periodo, preco);
+        var oferta = CriaOfertaViagem();
         var dal = new OfertaViagemDAL(context);
 
         //act
